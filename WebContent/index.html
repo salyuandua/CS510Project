@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Log in</title>
+<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
+</head>
+<body>
+<div class="container" style="width: 60%">
+<h1 class="text-center">Sign in</h1 >
+
+<div class="alert alert-danger alert-dismissible fade in" role="alert" id="alert" hidden="true"></div>
+
+<form>
+  <div class="form-group">
+    <label for="userTypes">You are a</label>
+    <select class="form-control" id="userTypes">
+    
+    </select>
+  </div>
+  <div id="namediv" class="form-group">
+    <label for="username">Name or user name</label>
+    <input type="text" class="form-control"  id="username" placeholder="Name or user name" >
+  </div>
+  <div id="pwddiv" class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password">
+  </div>
+
+  <div class="form-group ">
+  <button type="button" class="btn btn-primary btn-lg btn-block" id="signIn" data-loading-text="Sign in..." autocomplete="off">Sign in</button>
+   </div>
+</form>
+<!-- test
+
+        <button type="button" class="btn btn-primary" data-toggle="popover" title="Popover title" data-content="Default popover">Popover</button>
+-->
+</div>
+</body>
+</html>

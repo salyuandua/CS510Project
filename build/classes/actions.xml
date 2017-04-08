@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+	<action name="testAction" class="person.li.action.TestAction"></action>
+	<action name="userType" class="edu.marshall.project.user.action.UserTypeAction"></action>
+	<action name="signIn" class="edu.marshall.project.user.action.SignInAction"></action>
+	<action name="iniliatize" class="edu.marshall.project.user.action.UserIniliatizeAction"></action>
+	<action name="queryDoctor" class="edu.marshall.project.healthcare.action.QueryDoctorAction"></action>
+	<action name="queryPatByDoc" class="edu.marshall.project.healthcare.action.QueryPatientByDocAction"></action>
+</actions>
