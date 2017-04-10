@@ -191,68 +191,111 @@ public String selectV2(String sql,Object[] params){
  * insert data expands sqls and params
  * @return true if successful, flase if fail
  */
-public boolean insert(String[] sqls,ArrayList<Object[]> paramsArr){
-	if(sqls.length==0){
-		throw new NullPointerException("sql is empty");
-	}
-	try{
-	if(conn==null){//create connection
-		conn=ConnectionBuilder.getConnection();
-	}
-	conn.setAutoCommit(false);
-	String sql="";
-	for(int i=0;i<sqls.length;i++){
-		sql=sqls[i];
-		preStatement=conn.prepareStatement(sql);
-		
-		if(paramsBuilder(paramsArr.get(i))){
-			preStatement.executeUpdate();
-			
-		}else{
-			
-			conn.setAutoCommit(true);
-			conn.close();
-			return false;
-		}	
-	}
-	}catch(SQLException e){
-		
-	}
-	return true;
-}
+//public boolean insert(String[] sqls,ArrayList<Object[]> paramsArr){
+//	if(sqls.length==0){
+//		throw new NullPointerException("sql is empty");
+//	}
+//	try{
+//	if(conn==null){//create connection
+//		conn=ConnectionBuilder.getConnection();
+//	}
+//	conn.setAutoCommit(false);
+//	String sql="";
+//	for(int i=0;i<sqls.length;i++){
+//		sql=sqls[i];
+//		preStatement=conn.prepareStatement(sql);
+//		
+//		if(paramsBuilder(paramsArr.get(i))){
+//			preStatement.executeUpdate();
+//			
+//		}else{
+//			
+//			conn.setAutoCommit(true);
+//			conn.close();
+//			return false;
+//		}	
+//	}
+//	}catch(SQLException e){
+//		
+//	}
+//	return true;
+//}
 
 
 
 
-	public boolean update(ArrayList<String> sqls,ArrayList<Object[]> paramsArr){
-		if(sqls.size()==0){
-			throw new NullPointerException("sqls is empty");
+	public String update(ArrayList<String> sqls,ArrayList<Object[]> paramsArr){
+		if(sqls.size()==0||(sqls.size()!=paramsArr.size())){
+			throw new NullPointerException("sqls is wrong!");
 		}
 		try {
-		Iterator<String> it=sqls.iterator();
-		String sql="";
 		if(conn==null){
 			conn=ConnectionBuilder.getConnection();			
-			conn.setAutoCommit(false);
-			statement=conn.createStatement();
-			while(it.hasNext()){
-				sql=it.next();
-				if(operationType(sql)!=IS_INSERT){//update || del
-					
-					
-					
-				}
-			}
-		} 
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
+		} 
+		conn.setAutoCommit(false);
 		
+		for(int i=0;i<sqls.size();i++){
+			System.out.println("SQL IS :"+sqls.get(i));
+			preStatement=conn.prepareStatement(sqls.get(i));
+			if(!paramsBuilder(paramsArr.get(i))){
+				conn.rollback();
+				break;
+			}
+			preStatement.executeUpdate();
+		}
+		conn.commit();
+		return JSON.toJSONString("{\"state\":true}");
 		
-		return true;
+		}catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.setAutoCommit(true);
+				preStatement.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+		return JSON.toJSONString("{\"state\":false}");
 	}
+	/*
+	 * delete by sql
+	 * */
+//	public boolean delete(String sql,Object[] param){
+//		System.out.println("SQL IS: "+sql);
+//		if(sql==null||sql.equals("")||sql.toString().trim().equals("")){
+//			try {
+//				throw new SQLException("given SQL is wrong!");
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//				return false;
+//			}
+//		}
+//		if(conn==null){
+//			conn=ConnectionBuilder.getConnection();
+//		}
+//		return true;
+//		
+//		
+//	}
+	
+	
+	
+	
+	
+	
+	
 /**
  * determine type of operation	
  * @param args
@@ -306,14 +349,13 @@ private boolean paramsBuilder(Object[] params){
 	
 }
 public static void main(String[] args) {
-//	DaoHelper dao=new DaoHelper();
-//	
-//	String a=dao.selectV2("select a.patient_name_first as username,a.patient_name_last as userlast from patient as a;", null);
-//	System.out.println(a);
-	Map<String, Object> aa=new HashMap<>();
-	aa.put("ss", null);
-	System.out.println(aa.get("ss"));
-	
+ArrayList<Integer> a=new ArrayList<Integer>();
+	a.add(1);
+	a.add(2);
+	for(int i=0;i<a.size();i++){
+		System.out.println(a.get(i));
+	}
+
 	
 }
 }

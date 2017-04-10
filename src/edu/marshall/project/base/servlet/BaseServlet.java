@@ -1,6 +1,7 @@
 package edu.marshall.project.base.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.naming.spi.DirStateFactory.Result;
 import javax.servlet.ServletException;
@@ -8,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.ValiateUtil;
@@ -42,7 +45,13 @@ public class BaseServlet extends HttpServlet {
 		try {
 			Class<Action> tempClass=(Class<Action>) Class.forName(actionClassName);
 			Action actionClass=tempClass.newInstance();
-			result=(String)actionClass.excute(request.getParameter("param"));
+			HashMap<String, Object> param=JSON.parseObject(request.getParameter("param"), HashMap.class);
+			if(request.getSession().getAttribute("userInfo")!=null){
+				HashMap<String, Object> userInfo=(HashMap<String, Object>) request.getSession().getAttribute("userInfo");
+				param.put("userInfo", userInfo);
+			}
+			
+			result=(String)actionClass.excute(param);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

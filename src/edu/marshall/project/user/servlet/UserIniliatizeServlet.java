@@ -45,7 +45,7 @@ public class UserIniliatizeServlet extends BaseServlet {
 		System.out.println(JSON.toJSONString(userInfo));//{"patient_username":"as","patient_id":1,
 		//"patient_gender_id":2,"patient_password":"as","patient_name_first":"Rose","patient_name_last":"Donlad",
 		//"user_type_id":"1","patient_name_mid":"H","tablename":"patient","patient_doctor_id":1}
-		String result=new UserIniliatizeAction().excute(JSON.toJSONString(userInfo));
+		String result=new UserIniliatizeAction().excute(userInfo);
 		response.getWriter().write(result);
 		response.getWriter().flush();
 		response.getWriter().close();

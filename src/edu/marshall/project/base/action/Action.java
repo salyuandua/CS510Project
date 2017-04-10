@@ -1,6 +1,6 @@
 package edu.marshall.project.base.action;
 
-
+import java.util.Map;
 
 /**
  * All action should implement this interface 
@@ -15,5 +15,5 @@ public interface Action <T>{
 	 * @param params
 	 * @return result
 	 */
-	public T excute(String params);
+	public T excute(Map<String, Object> param);
 }

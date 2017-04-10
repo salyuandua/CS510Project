@@ -6,6 +6,7 @@ import edu.marshall.project.user.action.SignInAction;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
 
 /**
  * Servlet implementation class SignInServlet
@@ -40,8 +43,8 @@ public class SignInServlet extends BaseServlet implements Servlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Map<String,Object> userInfo=new SignInAction().excute(request.getParameter("param"));
+		HashMap<String, Object> param=JSON.parseObject(request.getParameter("param"), HashMap.class);
+		Map<String,Object> userInfo=new SignInAction().excute(param);
 		if(userInfo!=null){//success
 			//add this user to user list
 			ArrayList<Map<String,Object>> userList=(ArrayList<Map<String,Object>>)request.getServletContext().getAttribute("userList");

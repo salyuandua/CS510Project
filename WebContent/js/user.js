@@ -1,13 +1,36 @@
 $(function(){
-	project.post("app/base?action=userType",{},function(data){
+	//get all orgs
+	project.post("app/base?action=queryOrgs",{},function(data){
+		initialize_user_type(data[0]);
 		$.each(data,function(i,v){
-		
-		$("#userTypes").append("<option data-tablename="+v.user_type_tablename+"  "+"id="+v.user_type_id+">"+v.user_type_name+"</option>");
-		//console.log($("#userTypes option:selected").attr("id"));
+			
+			$("#org").append("<option data-options='"+JSON.stringify(v)+"'>"+v.organization_name+"</option>");
+
+			});
+		$("#org").change(function(){
+			var org=$(this).find("option:selected").data("options");
+			initialize_user_type(org);
 		});
 	},function(e){
 		
 	});
+	//initialize user type
+	function initialize_user_type(org){
+		$("#userTypes option").remove();
+		project.post("app/base?action=userType",org,function(data){
+			$.each(data,function(i,v){
+			
+			$("#userTypes").append("<option data-tablename="+v.user_type_tablename+"  "+"id="+v.user_type_id+">"+v.user_type_name+"</option>");
+		
+			});
+		},function(e){
+			
+		});
+	}
+	
+	
+	
+
 	//inital popvoers
 	$("#username").popover({content:"Please enter your user name!",trigger:"manual"}); 
 	$("#password").popover({content:"Please enter your password!",trigger:"manual"}); 
@@ -54,6 +77,9 @@ $(function(){
 			$("#userTypes option:selected").attr("data-tablename","");
 		}
 		param.tablename=$("#userTypes option:selected").attr("data-tablename");
+		param.organization_id=$("#org option:selected").data("options").organization_id;
+		param.organization_name=$("#org option:selected").data("options").organization_name;
+		param.organization_type_id=$("#org option:selected").data("options").organization_type_id;
 		//post data
 		project.post("/user/signin?action=signIn",param,function(data){//
 			console.log(data.message+"&&&");
