@@ -18,7 +18,7 @@ public class QueryDoctorAction implements Action<String>{
 //		String beginNum=Integer.parseInt(hashMap.get("beginNum"));
 //		String endNum=Integer.parseInt(hashMap.get("endNum"));
 		HashMap<String, Object> userInfo=(HashMap<String, Object>) param.get("userInfo");
-		String sql="select a.doctor_id,a.doctor_name_first,a.doctor_name_last,a.doctor_name_mid,a.doctor_username,a.doctor_gender_id,b.gender_name,count(p.patient_id) as patient_num "
+		String sql="select a.doctor_id,a.doctor_name_first,a.doctor_name_last,a.doctor_name_mid,if(a.doctor_name_mid is null,concat(a.doctor_name_first,' ',a.doctor_name_last),concat(a.doctor_name_first,' ',a.doctor_name_mid,' ',a.doctor_name_last)) as doctor_name, a.doctor_username,a.doctor_gender_id,b.gender_name,count(p.patient_id) as patient_num "
 				+ "from doctor as a left join gender as b on a.doctor_gender_id=b.gender_id left join patient as p on a.doctor_id=p.patient_doctor_id where a.doctor_organization_id=? group by a.doctor_id ";
 		String result=new DaoHelper().selectV2(sql, new Object[]{userInfo.get("organization_id")});
 		return result;

@@ -13,6 +13,9 @@
 			fail(e);
 		});
 	};
+//	project.getAllMed=function(){
+//		
+//	}
 //	project.paramBuider=function(attrArr){//["id=xxx","class=xxx"]
 //		for(var i=0;i<attrArr.length;i++){
 //			console.log(attrArr[i].attrType+"****"+attrArr[i].attrName);

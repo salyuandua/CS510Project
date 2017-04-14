@@ -8,4 +8,12 @@
 	<action name="queryDoctor" class="edu.marshall.project.healthcare.action.QueryDoctorAction"></action>
 	<action name="delDoctor" class="edu.marshall.project.healthcare.action.DeleteDoctorAction"></action>
 	<action name="queryPatByDoc" class="edu.marshall.project.healthcare.action.QueryPatientByDocAction"></action>
+	<action name="queryGender" class="edu.marshall.project.user.action.GenderQueryAction"></action>
+	<action name="addDoc" class="edu.marshall.project.healthcare.action.AddDoctorAction"></action>
+	<action name="queryPatByOrg" class="edu.marshall.project.healthcare.action.QueryPatientsByOrgAction"></action>
+	<action name="queryRestrByPat" class="edu.marshall.project.healthcare.action.QueryRestrByPatAction"></action>
+	<action name="queryReqMedByPat" class="edu.marshall.project.healthcare.action.QueryReqMedByPatAction"></action>
+	<action name="queryAllMed" class="edu.marshall.project.healthcare.action.QueryAllMedAction"></action>
+	<action name="queryMedByRestr" class="edu.marshall.project.healthcare.action.QueryMedByRestrAction"></action>
+	<action name="addPat" class="edu.marshall.project.healthcare.action.AddPatAction"></action>
 </actions>

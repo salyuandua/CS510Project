@@ -185,7 +185,23 @@ public String selectV2(String sql,Object[] params){
 	System.out.println("RESULT IS "+json);
 	return json;
 }
-
+/**
+ * get the max auto_creament id by sql
+ */
+public int getMaxId(String sql){
+	if(conn==null){
+		conn=ConnectionBuilder.getConnection();
+	}
+	try {
+		preStatement=conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		ResultSet resultSet=preStatement.executeQuery();
+		return resultSet.getInt(0);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return 0;
+}
 
 /**
  * insert data expands sqls and params
@@ -348,13 +364,33 @@ private boolean paramsBuilder(Object[] params){
 		return true;
 	
 }
+public static boolean paramBuilder(Object[] params,PreparedStatement preStatement){		
+	//System.out.println(params.length);
+		for(int i=0;i<params.length;i++){
+			try {
+			if(params[i] instanceof Integer){//int-> " and xx=param[i] 
+				preStatement.setInt(i+1, (int) params[i]);
+
+			}
+			if(params[i] instanceof Double){
+				preStatement.setDouble(i+1, (double) params[i]);
+			}
+			if(params[i] instanceof String){
+				preStatement.setString(i+1, (String) params[i]);
+			}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+			
+		}
+		return true;
+	
+}
 public static void main(String[] args) {
-ArrayList<Integer> a=new ArrayList<Integer>();
-	a.add(1);
-	a.add(2);
-	for(int i=0;i<a.size();i++){
-		System.out.println(a.get(i));
-	}
+int id=new DaoHelper().getMaxId("select * from doctor");
+System.out.println(id);
 
 	
 }
