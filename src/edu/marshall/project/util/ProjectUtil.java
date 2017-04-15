@@ -3,6 +3,7 @@ package edu.marshall.project.util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 
 public class ProjectUtil {
@@ -19,8 +20,20 @@ public static String getDate(){
 	Date date=new Date();
 	return dateFormat.format(date);
 }
+//generte account num
+public static String getAccountNum(){
+	Random random=new Random();
+	StringBuilder accountNum=new StringBuilder();
+	for(int i=0;i<8;i++){
+		accountNum.append(random.nextInt(10));
+	}
+	return accountNum.toString();
+}
+
+
 public static void main(String[] args) {
-	System.out.println(getDate());
-	System.out.println(prescriptionNumGenerter());
+//	System.out.println(getDate());
+//	System.out.println(prescriptionNumGenerter());
+	System.out.println(getAccountNum());
 }
 }
