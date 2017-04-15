@@ -16,4 +16,8 @@
 	<action name="queryAllMed" class="edu.marshall.project.healthcare.action.QueryAllMedAction"></action>
 	<action name="queryMedByRestr" class="edu.marshall.project.healthcare.action.QueryMedByRestrAction"></action>
 	<action name="addPat" class="edu.marshall.project.healthcare.action.AddPatAction"></action>
+	<action name="queryPatByUser" class="edu.marshall.project.doctor.action.QueryPatAction"></action>
+	<action name="queryAvMed" class="edu.marshall.project.doctor.action.QueryAvMedByPatAction"></action>
+	<action name="addPrescr" class="edu.marshall.project.doctor.action.InsertPrescriptionAction"></action>
+	<action name="queryPrescr" class="edu.marshall.project.doctor.action.QueryPrescriptionAction"></action>
 </actions>

@@ -20,7 +20,7 @@ public class SignInAction implements Action<Map<String,Object>>{
 		//HashMap<String, String> hashMap=JSON.parseObject(param, HashMap.class);//param from client
 		DaoHelper daoHelper=new DaoHelper();
 		String tablename=(String) param.get("tablename");
-		String sql="select a."+tablename+"_id,a."+tablename+"_name_first as user_first_name,a."+tablename+"_name_last as user_last_name,a."+tablename+"_name_mid as user_mid_name,"
+		String sql="select a."+tablename+"_id as user_id,a."+tablename+"_name_first as user_first_name,a."+tablename+"_name_last as user_last_name,a."+tablename+"_name_mid as user_mid_name,"
 				+"a."+tablename+"_gender_id as user_gender_id,b.gender_name as user_gender_name,a."+tablename+"_username as user_name"+
 				 " from "+tablename+" as a left join gender as b on a."+tablename+"_gender_id=b.gender_id"
 					+ " where "+tablename+"_username=? and "+tablename+"_password=?";

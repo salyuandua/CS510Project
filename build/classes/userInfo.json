@@ -1,6 +1,3 @@
-USER INFO IS :{"health_care_system_admin_id":1,
-"user_last_name":"Liu","user_name":"admin","organization_name":"Health Care System1",
-"user_first_name":"XiaoXin","user_mid_name":"L","user_gender_name":"Male",
-"user_type":"health_care_system_admin","organization_type_id":1,"organization_id":1,
-"user_gender_id":1,"user_type_id":"3","tablename":"health_care_system_admin"}
-{"health_care_system_admin_id":1,"user_last_name":"Liu","user_name":"admin","organization_name":"Health Care System1","user_first_name":"XiaoXin","user_mid_name":"L","user_gender_name":"Male","user_type":"health_care_system_admin","organization_type_id":1,"organization_id":1,"user_gender_id":1,"user_type_id":"3","tablename":"health_care_system_admin"}
+USER INFO IS :{"user_last_name":"John","user_name":"jack","organization_name":"Health Care System1","user_first_name":"Jack","user_mid_name":"","user_gender_name":"Male","user_type":"doctor","organization_type_id":1,"user_id":1,"organization_id":1,"user_gender_id":1,
+"user_type_id":"2","tablename":"doctor"}
+{"user_last_name":"John","user_name":"jack","organization_name":"Health Care System1","user_first_name":"Jack","user_mid_name":"","user_gender_name":"Male","user_type":"doctor","organization_type_id":1,"user_id":1,"organization_id":1,"user_gender_id":1,"user_type_id":"2","tablename":"doctor"}
