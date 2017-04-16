@@ -1,10 +1,42 @@
 $(function(){
+	//initail main order table
+	initialMainPage();
 	function initialMainPage(){
 		$("#order_tab tr").remove();
-		
+		project.post("app/base?action=queryOrderByPat",{},function(data){
+			$.each(data,function(i,v){
+				$("#order_tab").append("<tr>" +
+						"<td>"+v.orders_num+"</td>" +
+						"<td>"+v.order_date+"</td>" +
+						"<td>"+v.orders_tax+"</td>" +
+						"<td>"+v.orders_total_price+"</td>" +
+						"<td>"+v.bank_account_num+"("+v.organization_name+")</td>" +
+						"<td><button type=button class='btn btn-info' data-options='"+JSON.stringify(v)+"'>Detail</button></td>" +
+						"</tr>");
+			});
+			//add detail event
+			$(".btn.btn-info").click(function(){
+				$("#myModal").modal("show");
+				initialMedTab2($(this).data("options"));
+			});
+			
+		},function(){
+			
+		});
 		
 	}
-	
+	//initial med table2
+	function initialMedTab2(order){
+		$("#order_num").html("Order Nnmber:&nbsp&nbsp&nbsp"+order.orders_id);
+		$("#order_date").html("Order Date:&nbsp&nbsp&nbsp"+order.order_date);
+		$("#payment").html("Payment:&nbsp&nbsp&nbsp"+order.bank_account_num+"("+order.organization_name+")");
+		$("#med_tab2 tr").remove();
+		project.post("app/base?action=queryOrderedMed",order,function(data){
+			
+		},function(){
+			
+		});
+	}
 	
 	$("#addOrder").click(function(){
 		$("#addModal").modal("show");

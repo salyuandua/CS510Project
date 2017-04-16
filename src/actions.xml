@@ -24,4 +24,6 @@
 	<action name="queryAvMedByPre" class="edu.marshall.project.patient.action.QueryAvMedByPreAction"></action>
 	<action name="queryAvAccountByPat" class="edu.marshall.project.patient.action.QueryAvAccountByPatAction"></action>
 	<action name="addOrder" class="edu.marshall.project.patient.action.AddOrderAction"></action>
+	<action name="queryOrderByPat" class="edu.marshall.project.patient.action.QueryOrderByPatAction"></action>
+	<action name="queryOrderedMed" class="edu.marshall.project.patient.action.QueryMedByOrderAction"></action>
 </actions>
