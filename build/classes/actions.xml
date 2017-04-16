@@ -20,4 +20,8 @@
 	<action name="queryAvMed" class="edu.marshall.project.doctor.action.QueryAvMedByPatAction"></action>
 	<action name="addPrescr" class="edu.marshall.project.doctor.action.InsertPrescriptionAction"></action>
 	<action name="queryPrescr" class="edu.marshall.project.doctor.action.QueryPrescriptionAction"></action>
+	<action name="queryMedByPre" class="edu.marshall.project.doctor.action.QueryMedByPreAction"></action>
+	<action name="queryAvMedByPre" class="edu.marshall.project.patient.action.QueryAvMedByPreAction"></action>
+	<action name="queryAvAccountByPat" class="edu.marshall.project.patient.action.QueryAvAccountByPatAction"></action>
+	<action name="addOrder" class="edu.marshall.project.patient.action.AddOrderAction"></action>
 </actions>

@@ -6,17 +6,45 @@ $(function(){
 			$.each(data,function(i,v){
 				$("#prescr_tab").append("<tr>" +
 						"<td >"+v.prescription_num+"</td>" +
-						"<td >"+v.prescription_date+"</td>" +
+						"<td >"+v.real_date+"</td>" +
 						"<td >"+v.patient_name+"</td>" +
 						"<td >"+v.gender_name+"</td>" +
 						"<td ><button type=button class='btn btn-info' data-options='"+JSON.stringify(v)+"'>Detail</button></td>" +
+						"</tr>");
+			});
+			$(".btn.btn-info").click(function(){
+				//alert("ss");
+				$("#myModal").modal("show");
+				initialDetail($(this).data("options"));
+			});
+		},function(){
+			
+		});
+	}
+	initialPreTab();
+	//---------------------------------initial detail event
+	function initialDetail(prescription){
+		$("#prescr_num").html("Prescription Num:&nbsp&nbsp&nbsp"+prescription.prescription_num);
+		$("#prescr_date").html("Prescription Date:&nbsp&nbsp&nbsp"+prescription.real_date);
+		$("#patient_name").html("Patient Name:&nbsp&nbsp&nbsp"+prescription.patient_name);
+		$("#patient_gender").html("Gender:&nbsp&nbsp&nbsp"+prescription.gender_name);
+		$("#prescr_decr").html(prescription.prescription_decription);
+		$("#med_tab tr").remove();
+		project.post("app/base?action=queryMedByPre",prescription,function(data){
+			$.each(data,function(i,v){
+				$("#med_tab").append("<tr>" +
+						"<td>"+v.medicine_name+"</td>" +
+						"<td>"+v.manufacturer_name+"</td>" +
+						"<td>"+v.prescription_medicine_req_mun+"</td>" +
+						"<td>"+v.medicine_available_count+"</td>" +
 						"</tr>");
 			})
 		},function(){
 			
 		});
 	}
-	initialPreTab();
+	
+	
 	//------------------------------
 	function initialAddPre(){
 		project.post("app/base?action=queryPatByUser",{},function(data){
@@ -112,7 +140,8 @@ $(function(){
 		//post
 		console.log(param);
 		project.post("app/base?action=addPrescr",param,function(data){
-			
+			$("#addModal").modal("hide");
+			initialPreTab();
 		},function(){
 			
 		});

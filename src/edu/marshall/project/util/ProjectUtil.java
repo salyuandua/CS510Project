@@ -1,6 +1,6 @@
 package edu.marshall.project.util;
 
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -13,7 +13,14 @@ public static String prescriptionNumGenerter(){
 	date=date.replace("-", "");
 	String uuid=UUID.randomUUID().toString().substring(0, 5);
 	
-	return date+uuid;
+	return "PRE"+date+uuid;
+}
+public static String orderNumGenerter(){
+	String date=getDate();
+	date=date.replace("-", "");
+	String uuid=UUID.randomUUID().toString().substring(0, 5);
+	
+	return "ORD"+date+uuid;
 }
 public static String getDate(){
 	SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
