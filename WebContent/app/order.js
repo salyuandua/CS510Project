@@ -27,12 +27,25 @@ $(function(){
 	}
 	//initial med table2
 	function initialMedTab2(order){
-		$("#order_num").html("Order Nnmber:&nbsp&nbsp&nbsp"+order.orders_id);
+		$("#order_num").html("Order Nnmber:&nbsp&nbsp&nbsp"+order.orders_num);
 		$("#order_date").html("Order Date:&nbsp&nbsp&nbsp"+order.order_date);
 		$("#payment").html("Payment:&nbsp&nbsp&nbsp"+order.bank_account_num+"("+order.organization_name+")");
+		$("#tax").html("Tax:"+order.orders_tax);
+		var sub_total=new Number(order.orders_total_price-order.orders_tax);
+		sub_total=sub_total.toFixed(2);
+		$("#sub_total").html("Sub Total:"+sub_total);
+		$("#total").html("Total:"+order.orders_total_price);
 		$("#med_tab2 tr").remove();
 		project.post("app/base?action=queryOrderedMed",order,function(data){
-			
+			$.each(data,function(i,v){
+				$("#med_tab2").append("<tr>" +
+						"<td>"+v.medicine_name+"</td>" +
+						"<td>"+v.manufacturer_name+"</td>" +
+						"<td>"+v.medicine_price+"</td>" +
+						"<td>"+v.order_medicine_req_num+"</td>" +
+						"</tr>");
+			});
+
 		},function(){
 			
 		});

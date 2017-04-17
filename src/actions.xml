@@ -26,4 +26,5 @@
 	<action name="addOrder" class="edu.marshall.project.patient.action.AddOrderAction"></action>
 	<action name="queryOrderByPat" class="edu.marshall.project.patient.action.QueryOrderByPatAction"></action>
 	<action name="queryOrderedMed" class="edu.marshall.project.patient.action.QueryMedByOrderAction"></action>
+	<action name="updateBalance" class="edu.marshall.project.patient.action.UpdateBalanceAction"></action>
 </actions>
