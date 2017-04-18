@@ -27,4 +27,8 @@
 	<action name="queryOrderByPat" class="edu.marshall.project.patient.action.QueryOrderByPatAction"></action>
 	<action name="queryOrderedMed" class="edu.marshall.project.patient.action.QueryMedByOrderAction"></action>
 	<action name="updateBalance" class="edu.marshall.project.patient.action.UpdateBalanceAction"></action>
+	<action name="queryAllMed" class="edu.marshall.project.pharamacy.action.QueryAllMedAction"></action>
+	<action name="queryAllMa" class="edu.marshall.project.pharamacy.action.QueryAllManufacturerAction"></action>
+	<action name="addMed" class="edu.marshall.project.pharamacy.action.AddMedAction"></action>
+	<action name="addMan" class="edu.marshall.project.pharamacy.action.AddManAction"></action>
 </actions>
