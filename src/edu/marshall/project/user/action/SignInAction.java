@@ -38,7 +38,7 @@ public class SignInAction implements Action<Map<String,Object>>{
 		userInfo.put("organization_id", param.get("organization_id"));
 		userInfo.put("organization_name", param.get("organization_name"));
 		userInfo.put("organization_type_id", param.get("organization_type_id"));
-		System.out.println("USER INFO IS :"+JSON.toJSONString(userInfo));
+		//System.out.println("USER INFO IS :"+JSON.toJSONString(userInfo));
 		return userInfo;
 		
 	}

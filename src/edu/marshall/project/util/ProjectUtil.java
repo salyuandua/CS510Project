@@ -34,7 +34,11 @@ public static String getAccountNum(){
 	for(int i=0;i<8;i++){
 		accountNum.append(random.nextInt(10));
 	}
-	return accountNum.toString();
+	accountNum.append("-");
+	for(int i=0;i<8;i++){
+		accountNum.append(random.nextInt(10));
+	}
+	return "ACC"+accountNum.toString();
 }
 
 

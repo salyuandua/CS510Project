@@ -33,14 +33,48 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
+                    <li><a href="#" id="check_pro">Profile</a></li>
                     <li class="divider"></li>
                     <li><a href="login.html">Logout</a></li>
                 </ul>
             </div>
             </div>
             </div>
-            <!-- user dropdown ends -->
+<!-------------------------Profile Page --------------------------------------------------------------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+  <div class="modal-dialog" role="document" style="width: 100%">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center" id="myModalLabel" style="font-weight: bold;">Profile</h4>
+      </div>
+      <div class="modal-body " style="width: 100%">
+        <table style="width: 100%">
+        <tbody>
+     <!--  <tr>
+        <td><h5 style="font-weight: bold;" id="doctor_name"></h5></td>
+        <td><h5 style="font-weight: bold;margin-left: 400px" id="doctor_gender"></h5></td>
+        </tr>  --> 
+        <tr>
+        <td><h5 style="font-weight: bold;font-size: medium;" id="user_name2"></h5></td>
+        <td><h5 style="font-weight: bold;font-size: medium;" id="org_name"></h5></td>
+        <td><h5 style="font-weight: bold;font-size: medium;" id="user_role"></h5></td>
+        </tr>
+        <tr >
+        <td><h5 style="font-weight: bold;font-size: medium;" id="log_name"></h5></td>
+         <td ><div><h5 style="font-weight: bold;font-size: medium;float: left;" >Password:</h5><button id="set_pwd" type="button" class="btn btn-info" style="float: left;margin-left: 10%">Reset Password</button></div></td>
+       <td id="track"></td>
+        </tr>
+        
+        </tbody>
+        </table>
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+ <!-- --------------------------------user dropdown ends ----------------------------------->
 <div class="ch-container">
 <div class="row">
   <!-- left menu starts -->

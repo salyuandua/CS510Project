@@ -1,0 +1,663 @@
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: database_project
+-- ------------------------------------------------------
+-- Server version	5.7.17-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `app`
+--
+
+DROP TABLE IF EXISTS `app`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `app` (
+  `app_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `app_name` varchar(50) DEFAULT NULL,
+  `app_url` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`app_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app`
+--
+
+LOCK TABLES `app` WRITE;
+/*!40000 ALTER TABLE `app` DISABLE KEYS */;
+INSERT INTO `app` VALUES (1,'Order','order.html'),(2,'Doctor Managment','doctor_manage.html'),(3,'Account Management','bank.html'),(4,'Care Patients','care_patient.html'),(5,'Patient Management','patient_manage.html'),(6,'Prescription','prescription_doctor.html'),(7,'Payment','payment.html'),(8,'Medicine Management','medicine_manage.html'),(9,'Manufacturer Management','manufacturer_manage.html');
+/*!40000 ALTER TABLE `app` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `app_user`
+--
+
+DROP TABLE IF EXISTS `app_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `app_user` (
+  `app_user_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `app_user_user_id` smallint(6) DEFAULT NULL,
+  `app_user_user_type_id` smallint(6) DEFAULT NULL,
+  `app_user_app_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`app_user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_user`
+--
+
+LOCK TABLES `app_user` WRITE;
+/*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
+INSERT INTO `app_user` VALUES (1,1,1,1),(2,1,3,2),(3,1,5,3),(4,13,2,4),(6,1,3,5),(7,1,2,6),(8,1,1,7),(9,1,4,8),(10,1,4,9),(11,6,1,1),(12,6,1,7);
+/*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bank_account`
+--
+
+DROP TABLE IF EXISTS `bank_account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bank_account` (
+  `bank_account_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `bank_account_num` varchar(30) NOT NULL,
+  `bank_account_patient` smallint(6) NOT NULL,
+  `bank_account_blance` double DEFAULT '0',
+  `bank_account_org_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`bank_account_id`),
+  UNIQUE KEY `bank_account_num` (`bank_account_num`),
+  KEY `bank_account_patient` (`bank_account_patient`),
+  KEY `bank_account_org_id` (`bank_account_org_id`),
+  CONSTRAINT `bank_account_ibfk_1` FOREIGN KEY (`bank_account_patient`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `bank_account_ibfk_2` FOREIGN KEY (`bank_account_org_id`) REFERENCES `organization` (`organization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bank_account`
+--
+
+LOCK TABLES `bank_account` WRITE;
+/*!40000 ALTER TABLE `bank_account` DISABLE KEYS */;
+INSERT INTO `bank_account` VALUES (1,'1111-2222-7777',1,18004.66,3),(2,'178111-277222-444',2,20000,3),(3,'15903479',3,1200,3),(4,'ACC28138858-54029563',3,3400,3);
+/*!40000 ALTER TABLE `bank_account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bank_admin`
+--
+
+DROP TABLE IF EXISTS `bank_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bank_admin` (
+  `bank_admin_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `bank_admin_name_first` varchar(20) DEFAULT NULL,
+  `bank_admin_name_mid` varchar(20) DEFAULT NULL,
+  `bank_admin_name_last` varchar(20) DEFAULT NULL,
+  `bank_admin_gender_id` smallint(6) DEFAULT NULL,
+  `bank_admin_username` varchar(50) DEFAULT NULL,
+  `bank_admin_password` varchar(50) DEFAULT NULL,
+  `bank_admin_organization_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`bank_admin_id`),
+  KEY `bank_admin_gender_id` (`bank_admin_gender_id`),
+  KEY `bank_admin_organization_id` (`bank_admin_organization_id`),
+  CONSTRAINT `bank_admin_ibfk_1` FOREIGN KEY (`bank_admin_gender_id`) REFERENCES `gender` (`gender_id`),
+  CONSTRAINT `bank_admin_ibfk_2` FOREIGN KEY (`bank_admin_organization_id`) REFERENCES `organization` (`organization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bank_admin`
+--
+
+LOCK TABLES `bank_admin` WRITE;
+/*!40000 ALTER TABLE `bank_admin` DISABLE KEYS */;
+INSERT INTO `bank_admin` VALUES (1,'Bank',NULL,'Admin',1,'Yoo','123',3);
+/*!40000 ALTER TABLE `bank_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `doctor`
+--
+
+DROP TABLE IF EXISTS `doctor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `doctor` (
+  `doctor_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `doctor_name_first` varchar(20) DEFAULT NULL,
+  `doctor_name_last` varchar(20) DEFAULT NULL,
+  `doctor_name_mid` varchar(20) DEFAULT NULL,
+  `doctor_gender_id` smallint(6) NOT NULL,
+  `doctor_username` varchar(50) DEFAULT NULL,
+  `doctor_password` varchar(50) DEFAULT NULL,
+  `doctor_organization_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`doctor_id`),
+  UNIQUE KEY `doctor_username` (`doctor_username`),
+  KEY `doctor_ibfk_1` (`doctor_gender_id`),
+  KEY `doctor_organization_id` (`doctor_organization_id`),
+  CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`doctor_gender_id`) REFERENCES `gender` (`gender_id`),
+  CONSTRAINT `doctor_ibfk_2` FOREIGN KEY (`doctor_organization_id`) REFERENCES `organization` (`organization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `doctor`
+--
+
+LOCK TABLES `doctor` WRITE;
+/*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
+INSERT INTO `doctor` VALUES (1,'Jack','John',NULL,1,'jack','123',1),(2,'Yong','Li',NULL,1,NULL,NULL,1),(13,'qq','qq','qq',1,'qq','as',1);
+/*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `gender`
+--
+
+DROP TABLE IF EXISTS `gender`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `gender` (
+  `gender_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `gender_name` varchar(10) NOT NULL,
+  PRIMARY KEY (`gender_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `gender`
+--
+
+LOCK TABLES `gender` WRITE;
+/*!40000 ALTER TABLE `gender` DISABLE KEYS */;
+INSERT INTO `gender` VALUES (1,'Male'),(2,'Female');
+/*!40000 ALTER TABLE `gender` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `health_care_system_admin`
+--
+
+DROP TABLE IF EXISTS `health_care_system_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `health_care_system_admin` (
+  `health_care_system_admin_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `health_care_system_admin_name_first` varchar(20) DEFAULT NULL,
+  `health_care_system_admin_name_mid` varchar(20) DEFAULT NULL,
+  `health_care_system_admin_name_last` varchar(20) DEFAULT NULL,
+  `health_care_system_admin_gender_id` smallint(6) DEFAULT NULL,
+  `health_care_system_admin_username` varchar(30) DEFAULT NULL,
+  `health_care_system_admin_password` varchar(30) DEFAULT NULL,
+  `health_care_system_admin_organization_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`health_care_system_admin_id`),
+  KEY `health_care_system_admin_gender_id` (`health_care_system_admin_gender_id`),
+  KEY `health_care_system_admin_organization_id` (`health_care_system_admin_organization_id`),
+  CONSTRAINT `health_care_system_admin_ibfk_1` FOREIGN KEY (`health_care_system_admin_gender_id`) REFERENCES `gender` (`gender_id`),
+  CONSTRAINT `health_care_system_admin_ibfk_2` FOREIGN KEY (`health_care_system_admin_organization_id`) REFERENCES `organization` (`organization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `health_care_system_admin`
+--
+
+LOCK TABLES `health_care_system_admin` WRITE;
+/*!40000 ALTER TABLE `health_care_system_admin` DISABLE KEYS */;
+INSERT INTO `health_care_system_admin` VALUES (1,'XiaoXin','L','Liu',1,'admin','admin',1);
+/*!40000 ALTER TABLE `health_care_system_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `manufacturer`
+--
+
+DROP TABLE IF EXISTS `manufacturer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `manufacturer` (
+  `manufacturer_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `manufacturer_name` varchar(50) DEFAULT NULL,
+  `manufacturer_address` varchar(50) DEFAULT NULL,
+  `manufacturer_phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`manufacturer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `manufacturer`
+--
+
+LOCK TABLES `manufacturer` WRITE;
+/*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
+INSERT INTO `manufacturer` VALUES (1,'Easy Medicine Inc','1510 7th ave Hungtington WV','304-360-0853'),(2,'12121','adada','3131'),(3,'Cheers Medicine LLC','Mars','101-999-0000');
+/*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `medicine`
+--
+
+DROP TABLE IF EXISTS `medicine`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `medicine` (
+  `medicine_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `medicine_name` varchar(50) NOT NULL,
+  `medicine_available_count` int(11) DEFAULT '0',
+  `medicine_price` double DEFAULT '0',
+  `medicine_manufacturer_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`medicine_id`),
+  KEY `medicine_manufacturer_id` (`medicine_manufacturer_id`),
+  CONSTRAINT `medicine_ibfk_1` FOREIGN KEY (`medicine_manufacturer_id`) REFERENCES `manufacturer` (`manufacturer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `medicine`
+--
+
+LOCK TABLES `medicine` WRITE;
+/*!40000 ALTER TABLE `medicine` DISABLE KEYS */;
+INSERT INTO `medicine` VALUES (1,'Citalopram',12,65.89,1),(2,'Acetaminophen',10,7.23,1),(3,'Lexapro',48,337.02,1),(4,'Crazy Medicine',999,1000,1);
+/*!40000 ALTER TABLE `medicine` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_medicine`
+--
+
+DROP TABLE IF EXISTS `order_medicine`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `order_medicine` (
+  `order_medicine_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `order_medicine_order_id` smallint(6) DEFAULT NULL,
+  `order_medicine_medicine_id` smallint(6) DEFAULT NULL,
+  `order_medicine_req_num` int(11) DEFAULT NULL,
+  `order_medicine_total_price` double DEFAULT NULL,
+  PRIMARY KEY (`order_medicine_id`),
+  KEY `order_medicine_order_id` (`order_medicine_order_id`),
+  KEY `order_medicine_medicine_id` (`order_medicine_medicine_id`),
+  CONSTRAINT `order_medicine_ibfk_1` FOREIGN KEY (`order_medicine_order_id`) REFERENCES `orders` (`orders_id`),
+  CONSTRAINT `order_medicine_ibfk_2` FOREIGN KEY (`order_medicine_medicine_id`) REFERENCES `medicine` (`medicine_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_medicine`
+--
+
+LOCK TABLES `order_medicine` WRITE;
+/*!40000 ALTER TABLE `order_medicine` DISABLE KEYS */;
+INSERT INTO `order_medicine` VALUES (1,2,3,2,NULL),(2,3,3,11,NULL),(3,4,3,1,NULL);
+/*!40000 ALTER TABLE `order_medicine` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders` (
+  `orders_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `orders_num` varchar(50) NOT NULL,
+  `orders_total_price` double NOT NULL,
+  `orders_tax` double DEFAULT NULL,
+  `orders_date` date DEFAULT NULL,
+  `orders_patient_id` smallint(6) DEFAULT NULL,
+  `orders_account_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`orders_id`),
+  KEY `orders_patient_id` (`orders_patient_id`),
+  KEY `orders_account_id` (`orders_account_id`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`orders_patient_id`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`orders_account_id`) REFERENCES `bank_account` (`bank_account_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (2,'ORD201704161e342',721.22,47.18,'2017-04-16',1,1),(3,'ORD201704162dfc6',3966.73,259.51,'2017-04-16',1,1),(4,'ORD20170416d276f',360.61,23.59,'2017-04-16',1,1);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organization`
+--
+
+DROP TABLE IF EXISTS `organization`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organization` (
+  `organization_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `organization_name` varchar(50) DEFAULT NULL,
+  `organization_type_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`organization_id`),
+  KEY `organization_type_id` (`organization_type_id`),
+  CONSTRAINT `organization_ibfk_1` FOREIGN KEY (`organization_type_id`) REFERENCES `organization_type` (`organization_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organization`
+--
+
+LOCK TABLES `organization` WRITE;
+/*!40000 ALTER TABLE `organization` DISABLE KEYS */;
+INSERT INTO `organization` VALUES (1,'Health Care System1',1),(2,'CVS Pharmacy',2),(3,'Bank1',3),(4,'Health Care System2',1);
+/*!40000 ALTER TABLE `organization` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organization_type`
+--
+
+DROP TABLE IF EXISTS `organization_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organization_type` (
+  `organization_type_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `organization_type_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`organization_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organization_type`
+--
+
+LOCK TABLES `organization_type` WRITE;
+/*!40000 ALTER TABLE `organization_type` DISABLE KEYS */;
+INSERT INTO `organization_type` VALUES (1,'Health Care System'),(2,'Pharmacy'),(3,'Bank');
+/*!40000 ALTER TABLE `organization_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient`
+--
+
+DROP TABLE IF EXISTS `patient`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient` (
+  `patient_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `patient_name_first` varchar(20) DEFAULT NULL,
+  `patient_name_last` varchar(20) DEFAULT NULL,
+  `patient_name_mid` varchar(20) DEFAULT NULL,
+  `patient_gender_id` smallint(6) NOT NULL,
+  `patient_doctor_id` smallint(6) NOT NULL,
+  `patient_username` varchar(50) DEFAULT NULL,
+  `patient_password` varchar(50) DEFAULT NULL,
+  `patient_organization_id` smallint(6) DEFAULT NULL,
+  `patient_phone` varchar(20) DEFAULT NULL,
+  `patient_email` varchar(50) DEFAULT NULL,
+  `patient_emg_contact_name` varchar(30) DEFAULT NULL,
+  `patient_emg_contact_phone` varchar(30) DEFAULT NULL,
+  `patient_health_problem` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`patient_id`),
+  UNIQUE KEY `patient_username` (`patient_username`),
+  KEY `patient_gender_id` (`patient_gender_id`),
+  KEY `patient_doctor_id` (`patient_doctor_id`),
+  KEY `patient_organization_id` (`patient_organization_id`),
+  CONSTRAINT `patient_ibfk_1` FOREIGN KEY (`patient_gender_id`) REFERENCES `gender` (`gender_id`),
+  CONSTRAINT `patient_ibfk_2` FOREIGN KEY (`patient_doctor_id`) REFERENCES `doctor` (`doctor_id`),
+  CONSTRAINT `patient_ibfk_3` FOREIGN KEY (`patient_organization_id`) REFERENCES `organization` (`organization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient`
+--
+
+LOCK TABLES `patient` WRITE;
+/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES (1,'Rose','Donlad','H',2,1,'as','as',1,NULL,NULL,NULL,NULL,NULL),(2,'Xuejian','Li',NULL,1,1,NULL,NULL,1,'304-360-0840','l18765827739@gmail.com','ZhiWei Li','111-222-3333','This guy is crazy!sdasdadasdasdasdasdaddwefdsffsfgsfwrt   esfsf serwtr  rfrr ewrw sfsdfsdfsdfs'),(3,'Zhiwei','Lee',NULL,1,2,NULL,NULL,1,NULL,NULL,NULL,NULL,NULL),(4,'first','last','mid',1,1,'first','121',1,'1212','@@@@','wwww','qweq','eqweqewqeqfuck'),(5,'dongling','qi','',2,1,'qi','123',1,'18765827739','18765827739@164.com','xuejian li','3333333','This lady is good!!!!!'),(6,'Crazy','Man','L',1,2,'111','111',1,'333-000-000000','22@l.com','nicai','1212121','ccccccc');
+/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_doctor`
+--
+
+DROP TABLE IF EXISTS `patient_doctor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_doctor` (
+  `patient_doctor_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `patient_doctor_patient_id` smallint(6) NOT NULL,
+  `patient_doctor_doctor_id` smallint(6) NOT NULL,
+  PRIMARY KEY (`patient_doctor_id`),
+  KEY `patient_doctor_patient_id` (`patient_doctor_patient_id`),
+  KEY `patient_doctor_doctor_id` (`patient_doctor_doctor_id`),
+  CONSTRAINT `patient_doctor_ibfk_1` FOREIGN KEY (`patient_doctor_patient_id`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `patient_doctor_ibfk_2` FOREIGN KEY (`patient_doctor_doctor_id`) REFERENCES `doctor` (`doctor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_doctor`
+--
+
+LOCK TABLES `patient_doctor` WRITE;
+/*!40000 ALTER TABLE `patient_doctor` DISABLE KEYS */;
+INSERT INTO `patient_doctor` VALUES (1,1,1);
+/*!40000 ALTER TABLE `patient_doctor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `patient_req_medicines`
+--
+
+DROP TABLE IF EXISTS `patient_req_medicines`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `patient_req_medicines` (
+  `patient_req_medicines_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `patient_req_medicines_patient_id` smallint(6) DEFAULT NULL,
+  `patient_req_medicines_medicine_id` smallint(6) DEFAULT NULL,
+  `patient_req_medicines_req_num` int(11) DEFAULT NULL,
+  PRIMARY KEY (`patient_req_medicines_id`),
+  KEY `patient_req_medicines_patient_id` (`patient_req_medicines_patient_id`),
+  KEY `patient_req_medicines_medicine_id` (`patient_req_medicines_medicine_id`),
+  CONSTRAINT `patient_req_medicines_ibfk_1` FOREIGN KEY (`patient_req_medicines_patient_id`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `patient_req_medicines_ibfk_2` FOREIGN KEY (`patient_req_medicines_medicine_id`) REFERENCES `medicine` (`medicine_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `patient_req_medicines`
+--
+
+LOCK TABLES `patient_req_medicines` WRITE;
+/*!40000 ALTER TABLE `patient_req_medicines` DISABLE KEYS */;
+INSERT INTO `patient_req_medicines` VALUES (1,2,1,6),(2,4,2,9),(3,5,2,2),(4,6,2,2);
+/*!40000 ALTER TABLE `patient_req_medicines` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pharmacy_admin`
+--
+
+DROP TABLE IF EXISTS `pharmacy_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pharmacy_admin` (
+  `pharmacy_admin_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `pharmacy_admin_name_first` varchar(20) DEFAULT NULL,
+  `pharmacy_admin_name_mid` varchar(20) DEFAULT NULL,
+  `pharmacy_admin_name_last` varchar(20) DEFAULT NULL,
+  `pharmacy_admin_gender_id` smallint(6) DEFAULT NULL,
+  `pharmacy_admin_username` varchar(50) DEFAULT NULL,
+  `pharmacy_admin_password` varchar(50) DEFAULT NULL,
+  `pharmacy_admin_organization_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`pharmacy_admin_id`),
+  KEY `pharmacy_admin_gender_id` (`pharmacy_admin_gender_id`),
+  KEY `pharmacy_admin_organization_id` (`pharmacy_admin_organization_id`),
+  CONSTRAINT `pharmacy_admin_ibfk_1` FOREIGN KEY (`pharmacy_admin_gender_id`) REFERENCES `gender` (`gender_id`),
+  CONSTRAINT `pharmacy_admin_ibfk_2` FOREIGN KEY (`pharmacy_admin_organization_id`) REFERENCES `organization` (`organization_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pharmacy_admin`
+--
+
+LOCK TABLES `pharmacy_admin` WRITE;
+/*!40000 ALTER TABLE `pharmacy_admin` DISABLE KEYS */;
+INSERT INTO `pharmacy_admin` VALUES (1,'Pharmacy',NULL,'Admin',1,'admin1','admin1',2);
+/*!40000 ALTER TABLE `pharmacy_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prescription`
+--
+
+DROP TABLE IF EXISTS `prescription`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prescription` (
+  `prescription_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `prescription_num` varchar(30) NOT NULL,
+  `prescription_doctor_id` smallint(6) NOT NULL,
+  `prescription_patient_id` smallint(6) NOT NULL,
+  `prescription_date` date DEFAULT NULL,
+  `prescription_decription` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`prescription_id`),
+  UNIQUE KEY `prescription_num` (`prescription_num`),
+  KEY `prescription_doctor_id` (`prescription_doctor_id`),
+  KEY `prescription_patient_id` (`prescription_patient_id`),
+  CONSTRAINT `prescription_ibfk_1` FOREIGN KEY (`prescription_doctor_id`) REFERENCES `doctor` (`doctor_id`),
+  CONSTRAINT `prescription_ibfk_2` FOREIGN KEY (`prescription_patient_id`) REFERENCES `patient` (`patient_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prescription`
+--
+
+LOCK TABLES `prescription` WRITE;
+/*!40000 ALTER TABLE `prescription` DISABLE KEYS */;
+INSERT INTO `prescription` VALUES (1,'20170414SC001',1,2,'2017-04-14','TEST'),(2,'2017041550331',1,2,'2017-04-15','This prescription is soooooo good!'),(3,'201704151f572',1,1,'2017-04-15','This Lady has some problems.');
+/*!40000 ALTER TABLE `prescription` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prescription_medicine`
+--
+
+DROP TABLE IF EXISTS `prescription_medicine`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prescription_medicine` (
+  `prescription_medicine_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `prescription_medicine_prescription_id` smallint(6) NOT NULL,
+  `prescription_medicine_medicine_id` smallint(6) NOT NULL,
+  `prescription_medicine_req_mun` int(11) DEFAULT NULL,
+  PRIMARY KEY (`prescription_medicine_id`),
+  KEY `prescription_medicine_prescription_id` (`prescription_medicine_prescription_id`),
+  KEY `prescription_medicine_medicine_id` (`prescription_medicine_medicine_id`),
+  CONSTRAINT `prescription_medicine_ibfk_1` FOREIGN KEY (`prescription_medicine_prescription_id`) REFERENCES `prescription` (`prescription_id`),
+  CONSTRAINT `prescription_medicine_ibfk_2` FOREIGN KEY (`prescription_medicine_medicine_id`) REFERENCES `medicine` (`medicine_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prescription_medicine`
+--
+
+LOCK TABLES `prescription_medicine` WRITE;
+/*!40000 ALTER TABLE `prescription_medicine` DISABLE KEYS */;
+INSERT INTO `prescription_medicine` VALUES (1,1,1,10),(2,2,1,66),(3,3,1,10),(4,3,2,2);
+/*!40000 ALTER TABLE `prescription_medicine` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `restriction`
+--
+
+DROP TABLE IF EXISTS `restriction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `restriction` (
+  `restriction_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `restriction_patient_id` smallint(6) DEFAULT NULL,
+  `restriction_medicine_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`restriction_id`),
+  KEY `restriction_patient_id` (`restriction_patient_id`),
+  KEY `restriction_medicine_id` (`restriction_medicine_id`),
+  CONSTRAINT `restriction_ibfk_1` FOREIGN KEY (`restriction_patient_id`) REFERENCES `patient` (`patient_id`),
+  CONSTRAINT `restriction_ibfk_2` FOREIGN KEY (`restriction_medicine_id`) REFERENCES `medicine` (`medicine_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `restriction`
+--
+
+LOCK TABLES `restriction` WRITE;
+/*!40000 ALTER TABLE `restriction` DISABLE KEYS */;
+INSERT INTO `restriction` VALUES (1,2,2),(2,4,1),(3,5,1),(4,6,1);
+/*!40000 ALTER TABLE `restriction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_type`
+--
+
+DROP TABLE IF EXISTS `user_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_type` (
+  `user_type_id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `user_type_name` varchar(50) NOT NULL,
+  `user_type_tablename` varchar(50) DEFAULT NULL,
+  `user_type_organization_type_id` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`user_type_id`),
+  KEY `user_type_organization_type_id` (`user_type_organization_type_id`),
+  CONSTRAINT `user_type_ibfk_1` FOREIGN KEY (`user_type_organization_type_id`) REFERENCES `organization_type` (`organization_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_type`
+--
+
+LOCK TABLES `user_type` WRITE;
+/*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
+INSERT INTO `user_type` VALUES (1,'Patient','patient',1),(2,'Doctor','doctor',1),(3,'Admin in Health Care System','health_care_system_admin',1),(4,'Admin in Pharmacy','pharmacy_admin',2),(5,'Admin in Bank','bank_admin',3);
+/*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-04-18 20:45:15

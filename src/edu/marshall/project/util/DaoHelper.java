@@ -23,11 +23,11 @@ import com.alibaba.fastjson.JSON;
 
 import edu.marshall.project.db.ConnectionBuilder;
 /**
- * 
- * @author Xuejian Li
  * A useful JDBC until class for database operations(select,update,delete,insert)
- * Note: sql must be like "select * from table where attr1=? and attr2=?" Use ? to project
+ * Note: sql must be like "select * from table where attr1=? and attr2=?" Use ? to protect
  * database from rejecting attack.
+ * @author Xuejian Li
+ * 
  */
 
 
@@ -49,9 +49,12 @@ private static int IS_SELECT=3;
 
 
 /**
- * select result by given sql
+ * select result by given sql. note: this method and method select has a problem when sql contains any 
+ * rename operation because there is an issue in "dbuntils" framework, so command use selectV2 
+ *  as a placement.
  * @param sql
- * @return result of json
+ * @return result of List
+ * @see selectV2
  */
 public List<Map<String, Object>> selectForList(String sql, Object[] params){
 	System.out.println("SQL IS "+sql);
@@ -118,6 +121,7 @@ public String select(String sql, Object[] params){
 
 /**
  * if any rename(as) operation contained in sql, use this method or selectV2 to get a right result
+ * 
  */
 public List<Map<String, Object>> selectForListV2(String sql,Object[] params){
 	System.out.println("SQL IS: "+sql);

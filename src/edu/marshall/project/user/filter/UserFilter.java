@@ -11,11 +11,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet Filter implementation class UserFilter
+ * protect resource that just logged users can see
+ * @author Xuejian Li
  */
-@WebFilter("/UserFilter")
+@WebFilter("/app/*")
 public class UserFilter implements Filter {
 
     /**
@@ -36,10 +39,12 @@ public class UserFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
-		// pass the request along the filter chain
+		HttpServletRequest req=(HttpServletRequest) request;
+		HttpServletResponse resp=(HttpServletResponse) response;
+		if(req.getParameter("need_protect")==null&&req.getSession().getAttribute("userInfo")==null){//resource user is calling need to be protected
+			resp.sendRedirect("/CS510Project");
+			return;
+		}
 		chain.doFilter(request, response);
 	}
 

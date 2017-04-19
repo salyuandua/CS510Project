@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--All actions must be configure in this xml file  -->
 <actions>
 	
 	<action name="queryOrgs" class="edu.marshall.project.user.action.QueryOrgsAction"></action>
@@ -31,4 +32,7 @@
 	<action name="queryAllMa" class="edu.marshall.project.pharamacy.action.QueryAllManufacturerAction"></action>
 	<action name="addMed" class="edu.marshall.project.pharamacy.action.AddMedAction"></action>
 	<action name="addMan" class="edu.marshall.project.pharamacy.action.AddManAction"></action>
+	<action name="queryAllAcc" class="edu.marshall.project.bank.action.QueryAllAccountAction"></action>
+	<action name="queryAllPat" class="edu.marshall.project.bank.action.QueryAllPatientAction"></action>
+	<action name="addAccount" class="edu.marshall.project.bank.action.AddAccountAction"></action>
 </actions>

@@ -1,6 +1,6 @@
 $(function(){
 	//get all orgs
-	project.post("app/base?action=queryOrgs",{},function(data){
+	project.post("app/base?action=queryOrgs&need_protect=false",{},function(data){
 		initialize_user_type(data[0]);
 		$.each(data,function(i,v){
 			
@@ -17,7 +17,7 @@ $(function(){
 	//initialize user type
 	function initialize_user_type(org){
 		$("#userTypes option").remove();
-		project.post("app/base?action=userType",org,function(data){
+		project.post("app/base?action=userType&need_protect=false",org,function(data){
 			$.each(data,function(i,v){
 			
 			$("#userTypes").append("<option data-tablename="+v.user_type_tablename+"  "+"id="+v.user_type_id+">"+v.user_type_name+"</option>");

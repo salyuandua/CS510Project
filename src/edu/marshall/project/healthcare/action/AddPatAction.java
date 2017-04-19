@@ -59,6 +59,13 @@ public class AddPatAction implements Action<String>{
 				DaoHelper.paramBuilder(paramForReqMed, preparedStatement);
 				preparedStatement.executeUpdate();
 			}
+			//add application
+			sql="insert into app_user(app_user_user_id,app_user_user_type_id,app_user_app_id) values("+patientId+",1,1)";
+			preparedStatement=conn.prepareStatement(sql);
+			preparedStatement.executeUpdate();
+			sql="insert into app_user(app_user_user_id,app_user_user_type_id,app_user_app_id) values("+patientId+",1,7)";
+			preparedStatement=conn.prepareStatement(sql);
+			preparedStatement.executeUpdate();
 			conn.commit();
 			
 			
