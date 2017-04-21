@@ -14,7 +14,11 @@ import com.alibaba.fastjson.JSONObject;
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.db.ConnectionBuilder;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Add a patient
+ * @author Xuejian Li
+ *
+ */
 public class AddPatAction implements Action<String>{
 
 	@Override

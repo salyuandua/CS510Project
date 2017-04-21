@@ -6,11 +6,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * delete doctor operation
+ */
 public class DeleteDoctorAction implements Action<String>{
-	/**
-	 * delete doctor operation
-	 */
+
 	@Override
 	public String excute(Map<String, Object> param) {
 		//HashMap<String, Object> userInfo=(HashMap<String, Object>) param.get("userInfo");

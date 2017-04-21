@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 
 /**
- * Servlet implementation class SignInServlet
+ * user sign in
  */
 @WebServlet("/user/signin")
 public class SignInServlet extends BaseServlet implements Servlet {

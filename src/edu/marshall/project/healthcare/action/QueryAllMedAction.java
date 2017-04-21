@@ -4,7 +4,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query all medicines which exist in database
+ * @author Xuejian Li
+ *
+ */
 public class QueryAllMedAction implements Action<String>{
 
 	@Override

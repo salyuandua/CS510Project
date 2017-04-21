@@ -4,7 +4,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query patient's requiring medicines
+ * @author Xuejian Li
+ *
+ */
 public class QueryReqMedByPatAction implements Action<String>{
 
 	@Override

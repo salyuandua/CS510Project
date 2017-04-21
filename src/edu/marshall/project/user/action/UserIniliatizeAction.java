@@ -8,7 +8,11 @@ import com.alibaba.fastjson.JSON;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Initialize home.html 
+ * @author Xuejian Li
+ *
+ */
 public class UserIniliatizeAction implements Action<String>{
 
 	@Override

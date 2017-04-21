@@ -4,7 +4,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query all accounts that exist in the same bank as user
+ * @author Xuejian Li
+ *
+ */
 public class QueryAllAccountAction implements Action<String>{
 	@Override
 	public String excute(Map<String, Object> param) {

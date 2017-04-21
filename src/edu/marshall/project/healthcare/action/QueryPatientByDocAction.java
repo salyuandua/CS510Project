@@ -7,7 +7,11 @@ import com.alibaba.fastjson.JSON;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query patients by a specific doctor
+ * @author Xuejian Li
+ *
+ */
 public class QueryPatientByDocAction implements Action<String>{
 
 	@Override

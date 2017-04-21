@@ -134,9 +134,15 @@ public List<Map<String, Object>> selectForListV2(String sql,Object[] params){
 			return null;
 		}
 	}
-	if(conn==null){
-		conn=ConnectionBuilder.getConnection();
+	try {
+		if(conn==null||conn.isClosed()){
+			conn=ConnectionBuilder.getConnection();
+		}
+	} catch (SQLException e2) {
+		// TODO Auto-generated catch block
+		e2.printStackTrace();
 	}
+
 	try {
 		preStatement=conn.prepareStatement(sql);
 		if(params!=null){

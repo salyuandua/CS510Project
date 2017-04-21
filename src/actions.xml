@@ -35,4 +35,10 @@
 	<action name="queryAllAcc" class="edu.marshall.project.bank.action.QueryAllAccountAction"></action>
 	<action name="queryAllPat" class="edu.marshall.project.bank.action.QueryAllPatientAction"></action>
 	<action name="addAccount" class="edu.marshall.project.bank.action.AddAccountAction"></action>
+	<action name="queryOrgsWithType" class="edu.marshall.project.infocenter.action.QueryAllOrgAction"></action>
+	<action name="queryAllOrgType" class="edu.marshall.project.infocenter.action.QueryOrgTypeAction"></action>
+	<action name="addOrg" class="edu.marshall.project.infocenter.action.AddOrgAction"></action>
+	<action name="queryAdmin" class="edu.marshall.project.infocenter.action.QueryAllAdminAction"></action>
+	<action name="addAdmin" class="edu.marshall.project.infocenter.action.AddAdminAction"></action>
+	<action name="returnOrder" class="edu.marshall.project.healthcare.action.ReturnOrderAction"></action>
 </actions>

@@ -7,7 +7,11 @@ import com.alibaba.fastjson.JSONArray;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Get medicines except restriction medicines for a specific patient
+ * @author Xuejian Li
+ *
+ */
 public class QueryMedByRestrAction implements Action<String>{
 
 	@Override

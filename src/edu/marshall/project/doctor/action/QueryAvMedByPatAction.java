@@ -4,7 +4,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query available medicines belong to a specific patient
+ * @author Xuejian Li
+ *
+ */
 public class QueryAvMedByPatAction implements Action<String> {
 
 	@Override

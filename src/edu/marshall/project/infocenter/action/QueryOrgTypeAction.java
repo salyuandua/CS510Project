@@ -1,20 +1,15 @@
-package edu.marshall.project.user.action;
+package edu.marshall.project.infocenter.action;
 
 import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-/**
- * Query all genders
- * @author Xuejian Li
- *
- */
-public class GenderQueryAction implements Action<String>{
+
+public class QueryOrgTypeAction implements Action<String>{
 
 	@Override
 	public String excute(Map<String, Object> param) {
-		String sql="select * from gender";
-		
+		String sql="select * from organization_type";
 		return new DaoHelper().selectV2(sql, null);
 	}
 

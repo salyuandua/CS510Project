@@ -3,6 +3,7 @@ package edu.marshall.project.user.listener;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionAttributeListener;
@@ -40,9 +41,10 @@ public class UserListener implements HttpSessionListener, HttpSessionAttributeLi
     }
 
 	/**
-     * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
+     * When session is destroyed,remove this user's information from User List which exists in {@link ServletContext}
      */
     public void sessionDestroyed(HttpSessionEvent se)  { 
+    	System.out.println("Session destoryed!");
          Map<String, Object> userInfo=(Map<String, Object>)se.getSession().getAttribute("userInfo");
          if(userInfo!=null){
         	 ArrayList<Map<String,Object>> userList=(ArrayList<Map<String,Object>>)se.getSession().getServletContext().getAttribute("userList");

@@ -4,7 +4,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query restrictions by a specific patient
+ * @author Xuejian Li
+ *
+ */
 public class QueryRestrByPatAction implements Action<String>{
 
 	@Override

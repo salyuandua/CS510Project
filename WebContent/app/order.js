@@ -5,13 +5,22 @@ $(function(){
 		$("#order_tab tr").remove();
 		project.post("app/base?action=queryOrderByPat",{},function(data){
 			$.each(data,function(i,v){
+				var statueClass="<span class='label label-primary'>Submitted</span>";
+				var disbale="";
+				if(v.orders_statue==0||v.orders_statue=="0"){
+					statueClass="<span class='label label-danger'>Returned</span>";
+					disbale="disabled";
+				}
 				$("#order_tab").append("<tr>" +
 						"<td>"+v.orders_num+"</td>" +
 						"<td>"+v.order_date+"</td>" +
 						"<td>"+v.orders_tax+"</td>" +
 						"<td>"+v.orders_total_price+"</td>" +
 						"<td>"+v.bank_account_num+"("+v.organization_name+")</td>" +
-						"<td><button type=button class='btn btn-info' data-options='"+JSON.stringify(v)+"'>Detail</button></td>" +
+						
+						"<td>"+statueClass+"</td>"+
+						"<td><button type=button class='btn btn-info' data-options='"+JSON.stringify(v)+"'>Detail</button>" +
+								"<button "+disbale+" type=button class='btn btn-danger' style='margin-left:10px'  data-options='"+JSON.stringify(v)+"'>Return</button></td>" +
 						"</tr>");
 			});
 			//add detail event
@@ -19,7 +28,17 @@ $(function(){
 				$("#myModal").modal("show");
 				initialMedTab2($(this).data("options"));
 			});
-			
+			//return
+			$(".btn.btn-danger").click(function(){
+				if(confirm("Are you sure return this order?")==true){
+					//return
+					var param={};
+					param.order_id=$(this).data("options").orders_id;
+					project.post("app/base?action=returnOrder",param,function(){
+						initialMainPage();
+					});
+				}
+			});
 		},function(){
 			
 		});
@@ -75,8 +94,11 @@ $(function(){
 		//initial payment
 		project.post("app/base?action=queryAvAccountByPat",{},function(data){
 			$.each(data,function(i,v){
+				var balanace=new Number(v.bank_account_blance);
+				balanace=balanace.toFixed(2);
+				v.bank_account_blance=balanace;
 				$("#pay_radio").append("<div class=radio>" +
-						"<label><input type=radio data-options='"+JSON.stringify(v)+"'>"+v.bank_account_num+"&nbsp&nbsp&nbsp&nbsp&nbspBank:&nbsp "+v.organization_name+"&nbsp&nbsp&nbsp&nbsp&nbspBalance:&nbsp"+v.bank_account_blance+"</label>" +
+						"<label><input name=payment_radio type=radio data-options='"+JSON.stringify(v)+"'>"+v.bank_account_num+"&nbsp&nbsp&nbsp&nbsp&nbspBank:&nbsp "+v.organization_name+"&nbsp&nbsp&nbsp&nbsp&nbspBalance:&nbsp"+v.bank_account_blance+"</label>" +
 						"</div>");
 			});
 
@@ -113,12 +135,12 @@ $(function(){
 			total=total.toFixed(2);
 			console.log("*****"+total)
 			//total=total.toFixed(2);
-			$("#sub_total").html("Sub Total:&nbsp&nbsp&nbsp"+sub_total);
-			$("#sub_total").data("price",sub_total);
-			$("#total").html("Total:&nbsp&nbsp&nbsp"+total);
-			$("#total").data("price",total);
-			$("#tax").html("Tax:&nbsp&nbsp&nbsp"+tax);
-			$("#tax").data("price",tax);
+			$("#sub_total1").html("Sub Total:&nbsp&nbsp&nbsp"+sub_total);
+			$("#sub_total1").data("price",sub_total);
+			$("#total1").html("Total:&nbsp&nbsp&nbsp"+total);
+			$("#total1").data("price",total);
+			$("#tax1").html("Tax:&nbsp&nbsp&nbsp"+tax);
+			$("#tax1").data("price",tax);
 		});
 	}
 	//save
@@ -135,8 +157,8 @@ $(function(){
 		}
 		//check 
 		var param={};
-		param.total=$("#total").data("price");
-		param.tax=$("#tax").data("price");
+		param.total=$("#total1").data("price");
+		param.tax=$("#tax1").data("price");
 		param.account_id=$(":radio:checked").data("options").bank_account_id;
 		param.med_list=[];
 		$.each($("#med_tab tr"),function(i,v){
@@ -154,6 +176,8 @@ $(function(){
 			if(data==false){
 				alert("Save failed!");
 			}
+			$("#addModal").modal("hide");
+			initialMainPage();
 			//success
 		},function(){
 			alert("Save failed!");

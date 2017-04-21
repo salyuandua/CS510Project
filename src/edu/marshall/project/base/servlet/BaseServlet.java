@@ -17,7 +17,8 @@ import edu.marshall.project.util.ValiateUtil;
 import edu.marshall.project.util.XMLUtil;
 
 /**
- * Servlet implementation class TestServlet
+ * {@link BaseServlet} is a basic servlet to use Conveniently, you do not have to create another 
+ * servlet by "/app/base?action=xxx"
  */
 @WebServlet("/app/base")
 public class BaseServlet extends HttpServlet {
@@ -39,6 +40,11 @@ public class BaseServlet extends HttpServlet {
 		response.getWriter().flush();
 		response.getWriter().close();
 	}
+	/**
+	 * 
+	 * @param request
+	 * @return a {@link Object} instance that contains result action gives
+	 */
 	protected Object doAction(HttpServletRequest request){
 		String action=request.getParameter("action");
 		String actionClassName=XMLUtil.findActionClass(action);

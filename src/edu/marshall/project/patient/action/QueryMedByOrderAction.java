@@ -14,7 +14,7 @@ public class QueryMedByOrderAction implements Action<String>{
 	@Override
 	public String excute(Map<String, Object> param) {
 		String sql="select * from order_medicine as om left join "
-				+ "medicine as m on om.order_medicine_id=m.medicine_id left join "
+				+ "medicine as m on om.order_medicine_medicine_id=m.medicine_id left join "
 				+ "manufacturer as ma on m.medicine_manufacturer_id=ma.manufacturer_id "
 				+ "where om.order_medicine_order_id=?";
 		String result=new DaoHelper().selectV2(sql, new Object[]{param.get("orders_id")});

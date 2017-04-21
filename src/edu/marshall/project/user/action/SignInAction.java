@@ -9,12 +9,12 @@ import com.alibaba.fastjson.JSON;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
-public class SignInAction implements Action<Map<String,Object>>{
 /**
  * user sign in method
  * params is like: {username:xxx,password:xxx}
  */
+public class SignInAction implements Action<Map<String,Object>>{
+
 	@Override
 	public Map<String,Object> excute(Map<String, Object> param) {
 		//HashMap<String, String> hashMap=JSON.parseObject(param, HashMap.class);//param from client

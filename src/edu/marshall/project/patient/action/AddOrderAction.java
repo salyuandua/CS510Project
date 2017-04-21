@@ -51,8 +51,8 @@ public class AddOrderAction implements Action<String>{
 			DaoHelper.paramBuilder(params, preparedStatement);
 			preparedStatement.executeUpdate();
 			//insert data into main table
-			sql="insert into orders(orders_num,orders_total_price,orders_tax,orders_date,orders_patient_id,orders_account_id) values (?,?,?,?,?,?)";
-			params=new Object[]{ProjectUtil.orderNumGenerter(),param.get("total"),param.get("tax"),ProjectUtil.getDate(),userInfo.get("user_id"),param.get("account_id")};
+			sql="insert into orders(orders_num,orders_total_price,orders_tax,orders_date,orders_patient_id,orders_account_id,orders_statue) values (?,?,?,?,?,?,?)";
+			params=new Object[]{ProjectUtil.orderNumGenerter(),param.get("total"),param.get("tax"),ProjectUtil.getDate(),userInfo.get("user_id"),param.get("account_id"),1};
 			preparedStatement=conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			DaoHelper.paramBuilder(params, preparedStatement);
 			preparedStatement.executeUpdate();

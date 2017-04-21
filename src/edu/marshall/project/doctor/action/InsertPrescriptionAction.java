@@ -15,7 +15,11 @@ import edu.marshall.project.base.action.Action;
 import edu.marshall.project.db.ConnectionBuilder;
 import edu.marshall.project.util.DaoHelper;
 import edu.marshall.project.util.ProjectUtil;
-
+/**
+ * Add a prescription with transaction
+ * @author Xuejian Li
+ *
+ */
 public class InsertPrescriptionAction implements Action<String>{
 
 	@Override

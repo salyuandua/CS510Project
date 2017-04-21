@@ -7,7 +7,11 @@ import java.util.Map;
 
 import edu.marshall.project.base.action.Action;
 import edu.marshall.project.util.DaoHelper;
-
+/**
+ * Query all doctors who exist in same organization with logged user
+ * @author Xuejian Li
+ *
+ */
 public class QueryDoctorAction implements Action<String>{
 /*USER INFO IS :{"health_care_system_admin_id":1,"user_last_name":"Liu","user_name":"admin",
  * "organization_name":"Health Care System1","user_first_name":"XiaoXin","user_mid_name":"L",

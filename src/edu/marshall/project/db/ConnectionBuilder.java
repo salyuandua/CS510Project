@@ -11,7 +11,11 @@ import javax.sql.DataSource;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 
-
+/**
+ * A database connection until who can provides a {@link Connection} from c3p0 connection pool.
+ * @author Xuejian Li
+ *
+ */
 public class ConnectionBuilder {
 private static DataSource ds;
 static{
