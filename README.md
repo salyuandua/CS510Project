@@ -1,9 +1,8 @@
-# CS510Project
-A project for CS510-DATBASE STSTEM  in spring 2017 
+
+A project for Marshall Health STSTEM  in spring 2017 
 1. Aim: The primary purpose of this project is to give the opportunity to database Students to practice
 what they learn with a real application.
-2. Possible Practice Tools: Java, JDBC, MySQL, JavaScript, HTML, PHP.... (You can use any
-language but not fancy tools.)
+2. Possible Practice Tools: Java, JDBC, MySQL, JavaScript, HTML
 3. Group Policy: At most two learners can submit the project together if they implement the user
 interface. The group policy will only be option for the learners who try to implement user interface
 with databases (main program plus extra part of the projects). Each of them will get the same point
